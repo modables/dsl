@@ -1,16 +1,15 @@
 module ModablesDSL
   module DSL
 
-    def self.section *scaffold
+    def self.section *scaffold, &block
       @data = Hash.new if @data.nil?
 
-      yield_block = yield
-      config_block = scaffold.reverse.inject(yield_block) { |k, v| { v => k } }
+      config_block = scaffold.reverse.inject(self.arguments(&block)) { |k, v| { v => k } }
       @data.deep_merge!(config_block)
     end
 
-    def self.property arg_name, arg_value
-      @arguments.deep_merge!({ "#{arg_name}" => arg_value })
+    def self.method_missing meth, *args, &block
+      self.section(*args.unshift(meth), &block)
     end
 
     def self.arguments &block

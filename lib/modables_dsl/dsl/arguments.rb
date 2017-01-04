@@ -7,7 +7,7 @@ module ModablesDSL
         @args_h = Hash.new
       end
 
-      def argument_method meth, *args, &block
+      def property meth, *args, &block
 
         if block
           if args.include? :list
@@ -37,11 +37,11 @@ module ModablesDSL
       end
 
       def method_missing meth, *args, &block
-        argument_method meth, *args, &block
+        property meth, *args, &block
       end
 
       def test *args, &block
-        argument_method 'test', *args, &block
+        property 'test', *args, &block
       end
 
     end
