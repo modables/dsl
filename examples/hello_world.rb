@@ -5,12 +5,31 @@ gen do
       private_zone false
       name 'test'
       zone_id 'gonebaby'
-      statement :list do
-        sid 'this'
+      donts do
+        egg [
+          'toast',
+          'jam',
+        ]
+        test :json, 'old'
       end
-      statement :list do
-        sid 'that'
+      policy :json do
+        statement :list do
+          sid 'this'
+          condition do
+            test 'new'
+            variable 's3:prefix'
+            values [
+              "",
+              "home/",
+              "home/&{aws:username}/"
+            ]
+          end
+        end
+        statement :list do
+          sid 'that'
+        end
       end
+
     end
   end
 
