@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
-# coding: utf-8
 $:.unshift File.join File.dirname(__FILE__), *%w[.. lib]
 
 require 'modables_dsl'
 
-template = ModablesDSL::DSL.instance_eval(File.read('/Users/leroy/modables/modables-dsl/examples/main.tf.rb'))
+#template = ModablesDSL::DSL.instance_eval(File.read('/Users/leroy/modables/modables-dsl/examples/main.tf.rb'))
 
-print template
+ModablesDSL::Cli.parse
+
+#print template
