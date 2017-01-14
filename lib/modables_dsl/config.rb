@@ -6,8 +6,7 @@ module ModablesDSL
         config_file = ModablesDSL::Cli.opts['config'] || "#{ENV['HOME']}/.modables.yaml"
 
         unless File.file? config_file
-          puts "config file does not exist."
-          exit 1
+          ModablesDSL::Message.error "Config file does not exist. (#{config_file})"
         end
 
         @config = YAML.load_file(config_file)
