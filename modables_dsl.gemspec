@@ -1,19 +1,27 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+$:.unshift File.expand_path("../lib", __FILE__)
+require 'modables_dsl/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "modables-dsl"
-  spec.version       = '0.1.0'
-  spec.authors       = ["Chef CC"]
-  spec.email         = ["chefcc@modabl.es"]
-  spec.summary       = %q{Modables DSL}
-  spec.description   = %q{Modables DSL to generate JSON output.}
-  spec.homepage      = "http://modabl.es/"
-  spec.license       = "Apache 2.0"
+  spec.name          = 'modables_dsl'
+  spec.version       = ModablesDSL::VERSION
+  spec.authors       = ['Modables']
+  spec.email         = ['rubygems@modabl.es']
+  spec.summary       = %q{A DSL toolkit for Terraform and Packer.}
+  spec.description   = %q{This DSL generates JSON output that would be consumed by Terraform and Packer as input.}
+  spec.homepage      = 'http://modabl.es'
+  spec.license       = 'Apache-2.0'
 
-  spec.files         = ['lib/modables_dsl.rb']
-  spec.executables   = ['bin/modables_dsl']
-  spec.test_files    = ['tests/test_modables_dsl.rb']
-  spec.require_paths = ["lib"]
+  spec.files         = Dir['LICENSE', 'lib/**/*']
+  spec.executables   = ['modables-dsl']
+  spec.require_path  = 'lib'
+
+  s.metadata = {
+    'issue_tracker' => 'https://github.com/modables/dsl/issues'
+  }
+
+  spec.required_ruby_version = '~> 2.2'
+
+  spec.add_runtime_dependency 'activesupport', '~> 5.0'
+
+  spec.add_development_dependency 'rake'
 end
