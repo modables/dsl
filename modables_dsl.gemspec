@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.version       = ModablesDSL::VERSION
   spec.authors       = ['Modables']
   spec.email         = ['rubygems@modabl.es']
-  spec.summary       = %q{A DSL toolkit for Terraform and Packer.}
+  spec.summary       = %q{DSL toolkit for Terraform and Packer.}
   spec.description   = %q{This DSL generates JSON output that would be consumed by Terraform and Packer as input.}
   spec.homepage      = 'http://modabl.es'
   spec.license       = 'Apache-2.0'
