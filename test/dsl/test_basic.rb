@@ -3,13 +3,12 @@ require "modables_dsl"
 require 'json'
 require "test/unit"
 
-
 module TestModablesDSL
   class DSL < Test::Unit::TestCase
 
     def test_basic
 
-      response = ModablesDSL::DSL.instance_eval do
+      json_blob = ModablesDSL::DSL.instance_eval do
         gen do
           provider :aws do
             region 'us-east-1'
@@ -39,7 +38,7 @@ module TestModablesDSL
 
       end
 
-      mod_hash = JSON.parse response
+      mod_hash = JSON.parse json_blob
 
       # Ensure scaffolding is built properly
       assert mod_hash.has_key? 'resource'
