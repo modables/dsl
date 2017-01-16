@@ -15,13 +15,13 @@ Gem::Specification.new do |spec|
   spec.executables   = ['modables-dsl']
   spec.require_path  = 'lib'
 
-  s.metadata = {
+  spec.metadata = {
     'issue_tracker' => 'https://github.com/modables/dsl/issues'
   }
 
-  spec.required_ruby_version = '~> 2.2'
+  spec.required_ruby_version = '>= 2.2.2'
 
   spec.add_runtime_dependency 'activesupport', '~> 5.0'
 
-  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rake', '~> 0'
 end
