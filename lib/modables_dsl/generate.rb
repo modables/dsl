@@ -5,9 +5,7 @@ module ModablesDSL
       self.stack_files.each do |moda_file|
 
         file_prefix = moda_file.rpartition('.moda').first
-        file_suffix = ModablesDSL::Cli.opts['file-ext'] || \
-                      ModablesDSL::Config.get['dsl']['file_ext'] || \
-                      'moda.json'
+        file_suffix = ModablesDSL::Cli.opts['file-ext'] || ModablesDSL::Config.get['dsl']['file_ext']
 
         destination_file = "#{file_prefix}.#{file_suffix}"
 
@@ -23,15 +21,10 @@ module ModablesDSL
 
     def self.stack_files
 
-      dirs = if ModablesDSL::Config.get['dsl']['stack_dirs']
-        ModablesDSL::Config.get['dsl']['stack_dirs'] << Dir.pwd
-      else
-        [Dir.pwd]
-      end
-
       moda_files = Array.new
+      stack_dirs = ModablesDSL::Config.get['dsl']['stack_dirs'] << Dir.pwd
 
-      dirs.each do |dir|
+      stack_dirs.each do |dir|
         moda_files += Dir.glob("#{dir}/**/*.moda")
       end
 
