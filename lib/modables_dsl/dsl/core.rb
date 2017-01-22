@@ -26,7 +26,7 @@ module ModablesDSL
       ActiveSupport::JSON.encode(@data)
     end
 
-    def self.gen
+    def self.moda
       yield
       self.encode_json
     end
