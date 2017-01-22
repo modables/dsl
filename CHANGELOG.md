@@ -1,4 +1,5 @@
 #### 0.1.1
+* Replace `gen` scaffold with `moda`.
 * Add `--version` flag
 * Add `--file-ext` file extension option
 * Change file extension to `.moda`

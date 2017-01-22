@@ -9,7 +9,7 @@ module TestModablesDSL
     def test_basic
 
       json_blob = ModablesDSL::DSL.instance_eval do
-        gen do
+        moda do
           provider :aws do
             region 'us-east-1'
           end
