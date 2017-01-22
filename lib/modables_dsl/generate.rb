@@ -2,17 +2,17 @@ module ModablesDSL
   module Generate
 
     def self.files
-      self.stack_files.each do |mod_file|
+      self.stack_files.each do |moda_file|
 
-        file_prefix = mod_file.rpartition('.mod').first
-        file_suffix = ModablesDSL::Config.get['dsl']['destination_file_suffix'] || 'mod.json'
+        file_prefix = moda_file.rpartition('.moda').first
+        file_suffix = ModablesDSL::Cli.opts['file-ext'] || ModablesDSL::Config.get['dsl']['file_ext']
 
         destination_file = "#{file_prefix}.#{file_suffix}"
 
-        ModablesDSL::Message.log.info "Reading from #{mod_file}"
+        ModablesDSL::Message.log.info "Reading from #{moda_file}"
 
         File.open(destination_file, 'w') do |new_file|
-          new_file.write ModablesDSL::DSL.instance_eval IO.read mod_file
+          new_file.write ModablesDSL::DSL.instance_eval IO.read moda_file
         end
         
         ModablesDSL::Message.log.info "Wrote to #{destination_file}"
@@ -21,19 +21,23 @@ module ModablesDSL
 
     def self.stack_files
 
-      dirs = if ModablesDSL::Cli.opts['dir']
-        ModablesDSL::Config.get['dsl']['stack_dirs']
+      moda_files = Array.new
+      stack_dirs = ModablesDSL::Config.get['dsl']['stack_dirs'] << Dir.pwd
+
+      stack_dirs.each do |dir|
+        moda_files += Dir.glob("#{dir}/**/*.moda")
+      end
+
+      total_moda_files = moda_files.size
+
+      if total_moda_files == 0
+        ModablesDSL::Message.log.info '0 moda files found.'
+        exit 0
       else
-        [Dir.pwd]
+        ModablesDSL::Message.log.info "#{total_moda_files} moda #{"file".pluralize(total_moda_files)} found"
       end
 
-      mod_files = Array.new
-
-      dirs.each do |dir|
-        mod_files += Dir.glob("#{dir}/**/*.mod.rb")
-      end
-
-      mod_files
+      moda_files
     end
 
   end

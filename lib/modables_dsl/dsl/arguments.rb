@@ -9,6 +9,9 @@ module ModablesDSL
 
       def property meth, *args, &block
 
+        # If requested convert underscrores to dashes.
+        meth = ActiveSupport::Inflector.dasherize(meth.to_s) if args.include? :dash
+
         # If a block is passed it means we are building a hash.
         if block
 
@@ -33,11 +36,7 @@ module ModablesDSL
 
         # Else its a String, Integer, Boolean or Array.
         else
-          if args.include? :json
-            @args_h[meth] = ActiveSupport::JSON.encode(args.last)
-          else
-            @args_h[meth] = args.last
-          end
+          @args_h[meth] = args.last
         end
 
       end
