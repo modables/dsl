@@ -9,6 +9,9 @@ module ModablesDSL
 
       def property meth, *args, &block
 
+        # If requested convert underscrores to dashes.
+        meth = ActiveSupport::Inflector.dasherize(meth.to_s) if args.include? :dash
+
         # If a block is passed it means we are building a hash.
         if block
 
