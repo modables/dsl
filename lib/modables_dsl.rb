@@ -1,5 +1,6 @@
 require 'active_support/json'
 require 'active_support/core_ext/hash/deep_merge'
+require 'active_support/core_ext/string/inflections'
 require 'logger'
 require 'optparse'
 require 'yaml'
