@@ -6,7 +6,7 @@ module ModablesDSL
 
         @config = {
           'dsl' => {
-            'ext_json'   => 'moda.json',
+            'ext_json'   => 'mo.json',
             'stack_dirs' => Array.new,
           }
         }
