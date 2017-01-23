@@ -9,7 +9,7 @@ module TestModablesDSL
     def test_dash
 
       json_blob = ModablesDSL::DSL.instance_eval do
-        moda do
+        morb do
 
           resource :google_compute_instance, :www_test do
             metadata do
