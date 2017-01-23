@@ -5,7 +5,7 @@ module ModablesDSL
       self.stack_files.each do |moda_file|
 
         file_prefix = moda_file.rpartition('.moda').first
-        file_suffix = ModablesDSL::Cli.opts['file-ext'] || ModablesDSL::Config.get['dsl']['file_ext']
+        file_suffix = ModablesDSL::Cli.opts['ext-json'] || ModablesDSL::Config.get['dsl']['ext_json']
 
         destination_file = "#{file_prefix}.#{file_suffix}"
 
