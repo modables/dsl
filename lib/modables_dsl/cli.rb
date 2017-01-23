@@ -8,8 +8,8 @@ module ModablesDSL
           self.opts['config'] = config
         end
 
-        args.on('-f', '--file-ext tf.json', 'JSON output file extension') do |file_ext|
-          self.opts['file-ext'] = file_ext
+        args.on('-e', '--ext-json tf.json', 'JSON file extension') do |ext_json|
+          self.opts['ext-json'] = ext_json
         end
 
         args.on('-v', '--version', 'DSL version') do |version|

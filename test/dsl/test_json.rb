@@ -9,7 +9,7 @@ module TestModablesDSL
     def test_json
 
       json_blob = ModablesDSL::DSL.instance_eval do
-        moda do
+        morb do
 
           resource :aws_iam_role, :test do
             name 'test-role'
