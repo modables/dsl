@@ -2,5 +2,5 @@
 
 DSL toolkit for Terraform and Packer.
 
-## Documentation
-https://docs.modabl.es
+## Docs
+https://modabl.es/docs
