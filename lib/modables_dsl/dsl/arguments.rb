@@ -45,12 +45,6 @@ module ModablesDSL
       def method_missing meth, *args, &block
         property meth, *args, &block
       end
-
-      # For some reason if #test is not defined explicitly the DSL errors.
-      def test *args, &block
-        property 'test', *args, &block
-      end
-
     end
   end
 end
