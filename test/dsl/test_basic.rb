@@ -1,6 +1,5 @@
 require "modables_dsl"
 
-require 'json'
 require "test/unit"
 
 module TestModablesDSL
@@ -8,7 +7,7 @@ module TestModablesDSL
 
     def test_basic
 
-      json_blob = ModablesDSL::DSL.instance_eval do
+      mo_hash = ModablesDSL::DSL.instance_eval do
         morb do
           provider :aws do
             region 'us-east-1'
@@ -38,23 +37,21 @@ module TestModablesDSL
 
       end
 
-      mod_hash = JSON.parse json_blob
-
       # Ensure scaffolding is built properly
-      assert mod_hash.has_key? 'resource'
-      assert mod_hash.has_key? 'provider'
+      assert mo_hash.has_key? :resource
+      assert mo_hash.has_key? :provider
 
       # String
-      assert_equal 'us-east-1', mod_hash['provider']['aws']['region']
+      assert_equal 'us-east-1', mo_hash[:provider][:aws][:region]
 
       # Integer
-      assert_equal 65000, mod_hash['resource']['aws_customer_gateway']['test']['bgp_asn']
+      assert_equal 65000, mo_hash[:resource][:aws_customer_gateway][:test][:bgp_asn]
 
       # Array
-      assert_equal %w(10.0.0.4 10.0.0.5), mod_hash['resource']['aws_network_interface']['test']['private_ips']
+      assert_equal %w(10.0.0.4 10.0.0.5), mo_hash[:resource][:aws_network_interface][:test][:private_ips]
 
       # Hash
-      assert_equal({'Name' => 'Test VPC'}, mod_hash['resource']['aws_vpc']['test']['tags'])
+      assert_equal({:Name => 'Test VPC'}, mo_hash[:resource][:aws_vpc][:test][:tags])
 
     end
 

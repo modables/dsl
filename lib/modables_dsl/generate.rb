@@ -12,7 +12,7 @@ module ModablesDSL
         ModablesDSL::Message.log.info "Reading from #{morb_file}"
 
         File.open(destination_file, 'w') do |new_file|
-          new_file.write ModablesDSL::DSL.instance_eval IO.read morb_file
+          new_file.write ActiveSupport::JSON.encode ModablesDSL::DSL.instance_eval IO.read morb_file
         end
         
         ModablesDSL::Message.log.info "Wrote to #{destination_file}"

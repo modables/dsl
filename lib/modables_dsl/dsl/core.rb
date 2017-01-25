@@ -22,13 +22,9 @@ module ModablesDSL
       build.args_h
     end
 
-    def self.encode_json
-      ActiveSupport::JSON.encode(@data)
-    end
-
     def self.morb
       yield
-      self.encode_json
+      @data
     end
 
   end

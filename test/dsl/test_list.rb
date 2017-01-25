@@ -1,6 +1,5 @@
 require "modables_dsl"
 
-require 'json'
 require 'test/unit'
 
 module TestModablesDSL
@@ -8,7 +7,7 @@ module TestModablesDSL
 
     def test_list
 
-      json_blob = ModablesDSL::DSL.instance_eval do
+      mo_hash = ModablesDSL::DSL.instance_eval do
         morb do
 
           resource :aws_security_group, :test do
@@ -41,10 +40,8 @@ module TestModablesDSL
         end
       end
 
-      mod_hash = JSON.parse json_blob
-
       # JSON
-      assert mod_hash['resource']['aws_security_group']['test']['ingress'].is_a? Array
+      assert mo_hash[:resource][:aws_security_group][:test][:ingress].is_a? Array
     end
 
   end

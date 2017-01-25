@@ -1,6 +1,5 @@
 require "modables_dsl"
 
-require 'json'
 require 'test/unit'
 
 module TestModablesDSL
@@ -8,7 +7,7 @@ module TestModablesDSL
 
     def test_json
 
-      json_blob = ModablesDSL::DSL.instance_eval do
+      mo_hash = ModablesDSL::DSL.instance_eval do
         morb do
 
           resource :aws_iam_role, :test do
@@ -31,12 +30,10 @@ module TestModablesDSL
         end
       end
 
-      mod_hash = JSON.parse json_blob
-
       # JSON
       assert_equal(
         "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"ec2.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}",
-        mod_hash['resource']['aws_iam_role']['test']['assume_role_policy']
+        mo_hash[:resource][:aws_iam_role][:test][:assume_role_policy]
       )
     end
 
